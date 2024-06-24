@@ -1,18 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mwf07b/login_screen.dart';
+import 'package:mwf07b/forms.dart';
 
 import 'firebaseauth_services.dart';
 
-class Forms extends StatefulWidget {
-  const Forms({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Forms> createState() => _FormsState();  
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _FormsState extends State<Forms> {
+class _LoginScreenState extends State<LoginScreen> {
 
 
   bool isHide = true;
@@ -106,15 +107,15 @@ class _FormsState extends State<Forms> {
                 },
                 obscuringCharacter: "*",
                 decoration: InputDecoration(
-                  label: Text("Enter Your Password"),
-                  hintText: "J0hn****1",
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.key),
-                  suffix: IconButton(onPressed: (){
-                    setState(() {
-                      isHide = ! isHide;
-                    });
-                  }, icon: isHide == true ? Icon(Icons.remove_red_eye) : Icon(Icons.panorama_fish_eye))
+                    label: Text("Enter Your Password"),
+                    hintText: "J0hn****1",
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.key),
+                    suffix: IconButton(onPressed: (){
+                      setState(() {
+                        isHide = ! isHide;
+                      });
+                    }, icon: isHide == true ? Icon(Icons.remove_red_eye) : Icon(Icons.panorama_fish_eye))
                 ),
               ),
 
@@ -124,18 +125,18 @@ class _FormsState extends State<Forms> {
 
               ElevatedButton(onPressed: ()async{
 
-               if(formKey.currentState!.validate()){
-                 debugPrint(email.text);
-                 debugPrint(password.text);
+                if(formKey.currentState!.validate()){
+                  debugPrint(email.text);
+                  debugPrint(password.text);
 
-                 authService.registerUser(
-                   email: email.text,
-                   password: password.text,
-                   context: context
-                 );
-               }
+                  authService.loginUser(
+                      email: email.text,
+                      password: password.text,
+                      context: context
+                  );
+                }
 
-              }, child: Text("Register")),
+              }, child: Text("Login")),
 
 
               SizedBox(
@@ -144,9 +145,10 @@ class _FormsState extends State<Forms> {
 
               GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Forms(),));
                   },
-                  child: Text("Already Have an Account Login Here"))
+                  child: Text("Don't have an Account Kindly Create"))
+
 
 
             ],

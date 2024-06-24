@@ -1,11 +1,22 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mwf07b/api_services.dart';
 import 'package:mwf07b/desc_screen.dart';
+import 'package:mwf07b/firebase_options.dart';
 import 'package:mwf07b/forms.dart';
+import 'package:mwf07b/login_screen.dart';
+import 'package:mwf07b/splash_screen.dart';
+import 'package:mwf07b/user_fetch.dart';
 
-void main() {
+import 'add_user_data.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(const MyApp());
 }
 
@@ -15,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Forms(),
+      home: UserFetch(),
     );
   }
 }
